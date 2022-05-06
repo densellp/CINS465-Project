@@ -2,8 +2,13 @@
 
 {% block content %}
 
-<h1>This is the Index Page!</h1>
+<h1>This is the {{msg2}} Page!</h1>
 
-<p>This is a paragraph</p>
+<p>
+    Welcome to the index Page for the Car Hub Website, certain features do not currently
+    work as of yet, but changes will be coming soon so stay tuned!
+</p>
+
+<p><a href="{% url 'testPage' %}">Click here to see what I can do!</a></p>
 
 {% endblock content %}

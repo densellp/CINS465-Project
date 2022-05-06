@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+<!-- {% include 'nav-bar.html' %} -->
+
+{% block content %}
+
+<h1>Template is working</h1>
+<h1>This is the {{msg1}} Page!</h1>
+
+<p>
+    This is the testpage for the Car Hub website, this page is only for testing purposes and should not be reachable
+    by unauthorized users, so if you can see this page and you are not an admin it either means the developer
+    has not implamented that feature yet, or you got here in a malicious manner >:[
+</p>
+
+{% if number > 10 %}
+    <p>Number is greater than 10!</p>
+{% elif number == 10%}
+    <p>Number is exactly 10!</p>
+{% else %}
+    <p>Number is Less than 10!</p>
+{% endif %}
+
+<p>This is a paragraph</p>
+
+<ul>
+    {% for i in testlist %}
+        <li>ID: {{i.id}}</li>
+        <li>Title: {{i.title}}</li>
+        <li>Description: {{i.description}}</li>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'indexPage' %}">Wait I changed my mind go back!</a></p>
+
+{% endblock content %}
