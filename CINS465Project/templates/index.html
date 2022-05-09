@@ -9,6 +9,12 @@
     work as of yet, but changes will be coming soon so stay tuned!
 </p>
 
-<p><a href="{% url 'testPage' %}">Click here to see what I can do!</a></p>
+<p>Here is the current list of registered users on the website</p>
+
+<ul>
+    <li>{{usernames}}</li>
+</ul>
+
+<p><a href="{% url 'testPage' %}" class="button">Click here to see what I can do!</a></p>
 
 {% endblock content %}

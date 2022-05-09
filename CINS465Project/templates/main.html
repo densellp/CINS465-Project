@@ -1,4 +1,8 @@
+{% load static %}
+
 <!DOCTYPE html>
+<html class="no-js" lang="en"></html>
+
 <html>
 <head>
     <meta charset='utf-8'>
@@ -7,6 +11,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script> -->
+    <link rel="stylesheet" href="{% static 'css/foundation.css' %}">
 </head>
 <body>
     <!-- <h1>This is the main template</h1> -->
@@ -20,4 +25,8 @@
     <!-- <p>FOOTER</p> -->
 
 </body>
+
+    <script src="{% static 'assets/js/vendor.js' %}"></script>
+    <script src="{% static 'assets/js/foundation.js' %}"></script>
+
 </html>
