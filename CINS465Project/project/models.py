@@ -34,6 +34,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, null=True)
     body = models.TextField(null=True, blank=True)
     likes = models.IntegerField(default=0, null=True)
+    image = models.ImageField(null=True, blank=True, default="default.jpg")
 
     def __str__(self):
         return self.title

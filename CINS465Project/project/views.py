@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Profile
+from .models import Profile, Post
 from django.contrib.auth.models import User
+from .forms import postForm
 # Create your views here.
 
 testlist = [
@@ -22,7 +23,8 @@ testlist = [
     },
 ]
 
-userlist = User.objects.all()
+#userlist = User.objects.all()
+#postList = Post.objects.all()
 
 def testPage(request):
     #return HttpResponse('Hurray, you made it to the test page!')
@@ -32,6 +34,7 @@ def testPage(request):
     return render(request, 'project/testpage.html', context)
 
 def indexPage(request):
+    userlist = User.objects.all()
     msg2 = 'Index'
     #print(userlist)
     usernames = []
@@ -51,11 +54,29 @@ def profilePage(request):
     return render(request, 'profilepage.html', context)
 
 def mainFeed(request):
+    postList = Post.objects.all()
     msg5 = 'Main Feed'
-    context = {'msg5':msg5}
+    context = {'msg5':msg5, 'postList': postList}
     return render(request, 'mainfeed.html', context)
 
 def Error404(request):
     msg6 = 'Error'
     context = {'msg6':msg6}
     return render(request, '404.html', context)
+
+def createPost(request):
+    form = postForm()
+
+    if request.method == 'POST':
+        form = postForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('indexPage')
+
+    context = {'form': form}
+    return render(request, 'creat_post.html', context)
+
+#def addLike(request):
+    #tempPost = Post(instance=Post)
+    #tempPost.likes = tempPost.likes + 1
+    #return render(request, 'mainfeed.html')

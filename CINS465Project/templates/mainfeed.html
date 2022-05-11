@@ -6,7 +6,21 @@
 
 <p>
     Welcome to the Main Feed Page, this will allow users to make Post and see all the post that have ever been uploaded to
-    database, this feature is not implamented yet so stay tuned!
+    database.
 </p>
+
+{% for post in postList %}
+
+<img src="{{post.image.url}}">
+
+<p>User: {{post.profile}}</p>
+<p>Post: {{post.title}}</p>
+<p>Body: {{post.body}}</p>
+<p>Likes: {{post.likes}}</p>
+<p><a href="{% url 'mainFeed' %}" class="button">Comment</a></p>
+<p><a href="{% url 'mainFeed' %}" class="button">Like</a></p>
+<hr>
+
+{% endfor %}
 
 {% endblock content %}

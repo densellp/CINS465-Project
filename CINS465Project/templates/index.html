@@ -12,9 +12,13 @@
 <p>Here is the current list of registered users on the website</p>
 
 <ul>
-    <li>{{usernames}}</li>
+    <!-- <li>{{usernames}}</li> -->
+    {% for i in usernames %}
+        <li>Username: {{i}}</li>
+    {% endfor %}
 </ul>
 
 <p><a href="{% url 'testPage' %}" class="button">Click here to see what I can do!</a></p>
+<p><a href="{% url 'createPost' %}" class="button">Click here to create a post to the website</a></p>
 
 {% endblock content %}
