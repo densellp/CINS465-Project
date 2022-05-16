@@ -9,5 +9,6 @@ urlpatterns = [
     path('mainFeed/', views.mainFeed, name="mainFeed"),
     path('Error404/', views.Error404, name="Error404"),
     path('createPost/', views.createPost, name="createPost"),
-    #path('addLike/', views.addLike, name="addLike"),
+    path('addLike/<uuid:pk>/', views.addLike, name="addLike"),
+    path('logout/', views.logoutUser, name="logout"),
 ]

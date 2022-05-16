@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<p>
+    Welcome to the 404 Page, you should only be here if you intentionally tried to do something you shouldn't have.... IE try
+    to load the login page while you were an authorized user....
+</p>
+
+<p><a href="{% url 'indexPage' %}" class="button">Click here to go back Home</a></p>
+
+{% endblock content %}

@@ -18,7 +18,7 @@
 <p>Body: {{post.body}}</p>
 <p>Likes: {{post.likes}}</p>
 <p><a href="{% url 'mainFeed' %}" class="button">Comment</a></p>
-<p><a href="{% url 'mainFeed' %}" class="button">Like</a></p>
+<p><a href="{% url 'addLike' post.id %}" class="button">Like</a></p>
 <hr>
 
 {% endfor %}

@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from .models import Profile, Post
 from django.contrib.auth.models import User
 from .forms import postForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 
 testlist = [
@@ -26,6 +29,7 @@ testlist = [
 #userlist = User.objects.all()
 #postList = Post.objects.all()
 
+@login_required(login_url="loginPage")
 def testPage(request):
     #return HttpResponse('Hurray, you made it to the test page!')
     msg1 = 'TestPage'
@@ -48,13 +52,16 @@ def loginPage(request):
     context = {'msg3':msg3}
     return render(request, 'login.html', context)
 
+@login_required(login_url="loginPage")
 def profilePage(request):
     msg4 = 'Account'
     context = {'msg4':msg4}
     return render(request, 'profilepage.html', context)
 
+@login_required(login_url="loginPage")
 def mainFeed(request):
     postList = Post.objects.all()
+    postList.reverse()
     msg5 = 'Main Feed'
     context = {'msg5':msg5, 'postList': postList}
     return render(request, 'mainfeed.html', context)
@@ -64,8 +71,10 @@ def Error404(request):
     context = {'msg6':msg6}
     return render(request, '404.html', context)
 
+@login_required(login_url="loginPage")
 def createPost(request):
     form = postForm()
+    #form.profile = request.user
 
     if request.method == 'POST':
         form = postForm(request.POST, request.FILES)
@@ -76,7 +85,37 @@ def createPost(request):
     context = {'form': form}
     return render(request, 'creat_post.html', context)
 
-#def addLike(request):
-    #tempPost = Post(instance=Post)
-    #tempPost.likes = tempPost.likes + 1
-    #return render(request, 'mainfeed.html')
+def addLike(request, pk):
+    post = Post.objects.get(id=pk)
+    post.likes += 1
+    post.save()
+    return redirect('mainFeed')
+
+def loginPage(request):
+
+    if request.user.is_authenticated:
+        return redirect('Error404')
+    else:
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+
+            try:
+                user = User.objects.get(username=username)
+            except:
+                messages.error(request, 'Username does not exist')
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'You have logged in')
+                return redirect('indexPage')
+            else:
+                messages.error(request, 'Username OR Password is incorrect')
+
+        return render(request, 'login.html')
+
+def logoutUser(request):
+    logout(request)
+    messages.success(request, 'You have logged out')
+    return redirect('loginPage')

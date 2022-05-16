@@ -2,11 +2,26 @@
 
 {% block content %}
 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <h1>This is the {{msg3}} Page!</h1>
 
 <p>
     Welcome to the Login page, here is where you can make an account to then be able to use certain
     parts of the website, this feature is not implamented yet, so stay tuned!
 </p>
+
+<form action="{% url 'loginPage' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Enter Password">
+    <input type="submit" name="login">
+</form>
 
 {% endblock content %}
