@@ -75,14 +75,17 @@ def Error404(request):
 def createPost(request):
     form = postForm()
     #form.profile = request.user
+    profile = Profile.objects.get(user = request.user)
 
     if request.method == 'POST':
         form = postForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.profile = profile
+            post.save()
             return redirect('indexPage')
 
-    context = {'form': form}
+    context = {'form': form, 'profile': profile}
     return render(request, 'creat_post.html', context)
 
 def addLike(request, pk):
