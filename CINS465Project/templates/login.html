@@ -10,7 +10,19 @@
 </ul>
 {% endif %}
 
-<h1>This is the {{msg3}} Page!</h1>
+{% if page == 'register' %}
+
+<h1>This is the {{page}} Page!</h1>
+
+<form method="POST" action="{% url 'register' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Register User" />
+</form>
+
+{% else %}
+
+<h1>This is the {{page}} Page!</h1>
 
 <p>
     Welcome to the Login page, here is where you can make an account to then be able to use certain
@@ -22,6 +34,12 @@
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Enter Password">
     <input type="submit" name="login">
+
+    <p>Don't have an account <a href="{% url 'register' %}">Sign up</a></p>
 </form>
 
+{% endif %}
+
 {% endblock content %}
+
+<!-- Dedicated to Justin Peters, Rest in Peace 2000-2022 -->

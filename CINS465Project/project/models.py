@@ -50,3 +50,5 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.profile.user.username
+
+# Dedicated to Justin Peters, Rest in Peace 2000-2022

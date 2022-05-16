@@ -2,7 +2,13 @@
 
 {% block content %}
 
-<h1>Make a Post</h1>
+<h1>Make a Comment</h1>
+
+<img src="{{post.image.url}}">
+
+<p>User: {{post.profile}}</p>
+<p>Post: {{post.title}}</p>
+<p>Body: {{post.body}}</p>
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
