@@ -61,9 +61,9 @@ def profilePage(request):
 
 @login_required(login_url="loginPage")
 def mainFeed(request):
-    postList = Post.objects.all()
+    postList = Post.objects.all().order_by('-created')
     commentList = Comment.objects.all()
-    postList.reverse()
+    #postList.reverse()
     msg5 = 'Main Feed'
     context = {'msg5':msg5, 'postList': postList, 'commentList': commentList}
     return render(request, 'mainfeed.html', context)

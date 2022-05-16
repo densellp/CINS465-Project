@@ -2,7 +2,7 @@
 <p><a href="{% url 'mainFeed' %}">Main Feed</a></p>
 <p><a href="{% url 'createPost' %}">Create Post</a></p>
 {% if request.user.is_authenticated %}
-<p><a href="{% url 'logout' %}">Hello, Logout?</a></p>
+<p><a href="{% url 'logout' %}">Hello {{request.user}}, Logout?</a></p>
 {% else %}
 <p><a href="{% url 'loginPage' %}">Login/Sign up</a></p>
 {% endif %}
